@@ -1,6 +1,13 @@
 {
     theme: {
         game: {
+            furniture: [
+                {
+                    key: 'home.background',
+                    x: 0,
+                    y: 0,
+                },
+            ],
             music: "game.backgroundMusicTwo",
             achievements: true, //enable or disable achievements for this theme
         },

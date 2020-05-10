@@ -11,7 +11,9 @@
   },
   "homepage": "https://github.com/bbc/genie-starter-pack#readme",
   "dependencies": {
-    "genie": "git+ssh://git@github.com/bbc/genie.git#v3.4.3"
+    "genie": "git+ssh://git@github.com/bbc/genie.git#v3.4.6",
+    "peer": "^0.5.2",
+    "peerjs": "^1.2.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
@@ -26,6 +28,8 @@
     "start:pack": "webpack-dev-server --output-path=\"./output\" --config node_modules/genie/build-scripts/webpack.config.js --env.development",
     "build": "webpack --config node_modules/genie/build-scripts/webpack.config.js",
     "eslint": "eslint . --ignore-pattern lodash --ignore-path .gitignore",
-    "validate": "node node_modules/genie/build-scripts/schemavalidator/validator.js achievement"
+    "validate": "node node_modules/genie/build-scripts/schemavalidator/validator.js achievement",
+    "startPeer": "node handshake-server.js",
+    "startPeerX": "peerjs --port 9000 --key peerjs --path /handshake"
   }
 }

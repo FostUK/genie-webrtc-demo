@@ -1,0 +1,12 @@
+{
+	"speedX": { "min": -50, "max": 50 },
+	"speedY": { "min": -100, "max": -50 },
+	"quantity": { "min": 10, "max": 15 },
+	"lifespan": 1000,
+	"rotate": { "min": -360, "max": 360 },
+	"gravityY": 300,
+	"on": false,
+	"alpha": {"start":  1, "end": 0},
+	"frame": 2,
+	"bounce": 1
+}
