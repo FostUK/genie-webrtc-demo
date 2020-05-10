@@ -7,12 +7,18 @@ const initialiseConnection = scene => conn => {
 
 	const player = scene.add.sprite(0, 0, "game.dino1")
 	player.scale = 4
+	let lastPos = {x:0,y:0}
 
 	conn.on("data", data => {
 		console.log(data)
 
 		player.x = data.x
 		player.y = data.y
+
+		player.flipX = lastPos.x > data.x
+
+		lastPos.x = data.x
+		lastPos.y = data.y
 	})
 
 	conn.on("open", () => {
@@ -50,12 +56,18 @@ export class Game extends Screen {
 
 	update(time, delta) {
 		const deltaV = velocity * delta
+		const deltaX = getV(this.keys.left, this.keys.right, deltaV)
+		const deltaY = getV(this.keys.up, this.keys.down, deltaV)
 
-		this.keys.left.isDown && (this.player.x = this.player.x - deltaV)
-		this.keys.right.isDown && (this.player.x = this.player.x + deltaV)
-		this.keys.up.isDown && (this.player.y = this.player.y - deltaV)
-		this.keys.down.isDown && (this.player.y = this.player.y + deltaV)
+		const dirty = Boolean(deltaX) || Boolean(deltaY)
 
-		peers.forEach(peer => peer.send({ x: this.player.x, y: this.player.y }))
+		this.player.x += deltaX
+		this.player.y += deltaY
+		deltaX < 0 && (this.player.flipX = true)
+		deltaX > 0 && (this.player.flipX = false)
+
+		dirty && peers.forEach(peer => peer.send({ x: this.player.x, y: this.player.y }))
 	}
 }
+
+const getV = (a, b, v) => v * (a.isDown ? -1 : b.isDown ? 1 : 0)
