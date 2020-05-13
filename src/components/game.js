@@ -2,16 +2,18 @@ import { Screen } from "/node_modules/genie/src/core/screen.js"
 
 let peers = []
 
+const localDev = false
+
 const initialiseConnection = scene => conn => {
 	peers.push(conn)
 
+	console.log("initialising connection")
+
 	const player = scene.add.sprite(0, 0, "game.dino1")
 	player.scale = 4
-	let lastPos = {x:0,y:0}
+	let lastPos = { x: 0, y: 0 }
 
 	conn.on("data", data => {
-		console.log(data)
-
 		player.x = data.x
 		player.y = data.y
 
@@ -22,7 +24,11 @@ const initialiseConnection = scene => conn => {
 	})
 
 	conn.on("open", () => {
-		conn.send("hello!")
+		console.log("connection open")
+	})
+
+	conn.on("error", err => {
+		console.error(err)
 	})
 }
 
@@ -35,9 +41,26 @@ export class Game extends Screen {
 		this.addBackgroundItems()
 
 		const peer = new Peer({
-			host: "localhost",
-			port: 9000,
+			host: localDev ? "localhost" : "handshake.bigredmonster.com",
+			port: localDev ? 4570 : 80,
 			path: "/handshake",
+			debug: 2,
+			key: "api",
+			config: {
+				iceServers: [
+					{ url: "stun:stun.l.google.com:19302" },
+					//{ url: "stun:stun1.l.google.com:19302" },
+					//{ url: "stun:stun2.l.google.com:19302" },
+					//{ url: "stun:stun3.l.google.com:19302" },
+					//{ url: "stun:stun4.l.google.com:19302" },
+					{
+						url: "turn:numb.viagenie.ca",
+						credential: "Bollox59NUM",
+						username: "nick@bigredmonster.com",
+					},
+					//{ url: "turn:homeo@turn.bistri.com:80", credential: "homeo" },
+				],
+			},
 		})
 
 		this.player = this.add.sprite(0, 0, "game.dino1")
@@ -46,12 +69,20 @@ export class Game extends Screen {
 		this.keys = this.input.keyboard.createCursorKeys()
 
 		//connect existing
-		fetch("http://localhost:9000/handshake/peerjs/peers")
+		fetch(
+			localDev
+				? "http://localhost:4570/handshake/api/peers"
+				: "http://handshake.bigredmonster.com/handshake/peerjs/peers",
+		)
 			.then(response => response.json())
 			.then(ids => ids.forEach(connectionFromId(this, peer)))
 
 		//recieve new connections
 		peer.on("connection", initialiseConnection(this))
+
+		peer.on("error", err => {
+			console.error(err.type)
+		})
 	}
 
 	update(time, delta) {
