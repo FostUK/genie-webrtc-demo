@@ -2,11 +2,11 @@
 	{
 		"moduleVar": "peerjs",
 		"npmName": "peerjs",
-		"url": "node_modules/peerjs/dist/peerjs.min.js"
+		"url": "/node_modules/peerjs/dist/peerjs.min.js"
 	},
 	{
 		"moduleVar": "simplepeer",
 		"npmName": "simple-peer",
-		"url": "node_modules/simple-peer/simplepeer.min.js"
+		"url": "/node_modules/simple-peer/simplepeer.min.js"
 	}
 ]
