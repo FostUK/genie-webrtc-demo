@@ -2,7 +2,7 @@ import { Screen } from "/node_modules/genie/src/core/screen.js"
 
 let peers = []
 
-const localDev = true
+const localDev = false
 
 const initialiseConnection = scene => conn => {
 	peers.push(conn)
@@ -42,49 +42,32 @@ export class Game extends Screen {
 
 		const peer = new Peer({
 			host: localDev ? "localhost" : "handshake.bigredmonster.com",
-			port: 4570,
+			port: localDev? 4570 : 80,
 			path: "/handshake",
 			debug: 2,
 			key: "api",
 			config: {
-				//iceServers: [
-				//	{ url: "stun:stun.l.google.com:19302" },
-				//	//{ url: "stun:stun1.l.google.com:19302" },
-				//	//{ url: "stun:stun2.l.google.com:19302" },
-				//	//{ url: "stun:stun3.l.google.com:19302" },
-				//	//{ url: "stun:stun4.l.google.com:19302" },
-				//],
+				iceServers: [
+					{ url: "stun:stun.l.google.com:19302" },
+					{ url: "stun:stun1.l.google.com:19302" },
+					{ url: "stun:stun2.l.google.com:19302" },
+					{ url: "stun:stun3.l.google.com:19302" },
+					{ url: "stun:stun4.l.google.com:19302" },
+				],
 			},
 		})
-
-		//const speer = new SimplePeer({ trickle: false })
-		//
-		//speer.on("connect", () => {
-		//	console.log("CONNECT")
-		//	speer.send("Dr Zhivago" + Math.random())
-		//})
-		//
-		//speer.on("error", console.error)
-		//
-		//speer.on("signal", data => {
-		//	console.log("SIGNAL", JSON.stringify(data))
-		//})
-		//
-		//speer.on("data", data => {
-		//	console.log("data", data)
-		//})
 
 		this.player = this.add.sprite(0, 0, "game.dino1")
 		this.player.scale = 4
 
 		this.keys = this.input.keyboard.createCursorKeys()
 
-		//connect existing
-		fetch(
-			localDev
+		const handshake = localDev
 				? "http://localhost:4570/handshake/api/peers"
-				: "http://handshake.bigredmonster.com/handshake/peerjs/peers",
-		)
+				: "http://handshake.bigredmonster.com/handshake/api/peers"
+
+		//connect existing
+		fetch(handshake)
 			.then(response => response.json())
 			.then(ids => ids.forEach(connectionFromId(this, peer)))
 
