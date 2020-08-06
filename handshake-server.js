@@ -3,18 +3,19 @@ const { PeerServer } = require("peer")
 
 
 const peerServer = PeerServer({
-	port: 9000,
+	port: 4570,
 	path: "/handshake",
 	allow_discovery: true,
+	key: "api",
 	//generateClientId: customGenerationFunction,
 })
 
 
 
-//peerServer.on("connection", client => {
-//	console.log(client)
-//})
-//
-//peerServer.on("disconnect", client => {
-//	console.log(client)
-//})
+peerServer.on("connection", client => {
+	console.log(client)
+})
+
+peerServer.on("disconnect", client => {
+	console.log(client)
+})

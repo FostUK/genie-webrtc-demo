@@ -2,7 +2,7 @@ import { Screen } from "/node_modules/genie/src/core/screen.js"
 
 let peers = []
 
-const localDev = false
+const localDev = true
 
 const initialiseConnection = scene => conn => {
 	peers.push(conn)
@@ -42,26 +42,37 @@ export class Game extends Screen {
 
 		const peer = new Peer({
 			host: localDev ? "localhost" : "handshake.bigredmonster.com",
-			port: localDev ? 4570 : 80,
+			port: 4570,
 			path: "/handshake",
 			debug: 2,
 			key: "api",
 			config: {
-				iceServers: [
-					{ url: "stun:stun.l.google.com:19302" },
-					//{ url: "stun:stun1.l.google.com:19302" },
-					//{ url: "stun:stun2.l.google.com:19302" },
-					//{ url: "stun:stun3.l.google.com:19302" },
-					//{ url: "stun:stun4.l.google.com:19302" },
-					{
-						url: "turn:numb.viagenie.ca",
-						credential: "Bollox59NUM",
-						username: "nick@bigredmonster.com",
-					},
-					//{ url: "turn:homeo@turn.bistri.com:80", credential: "homeo" },
-				],
+				//iceServers: [
+				//	{ url: "stun:stun.l.google.com:19302" },
+				//	//{ url: "stun:stun1.l.google.com:19302" },
+				//	//{ url: "stun:stun2.l.google.com:19302" },
+				//	//{ url: "stun:stun3.l.google.com:19302" },
+				//	//{ url: "stun:stun4.l.google.com:19302" },
+				//],
 			},
 		})
+
+		//const speer = new SimplePeer({ trickle: false })
+		//
+		//speer.on("connect", () => {
+		//	console.log("CONNECT")
+		//	speer.send("Dr Zhivago" + Math.random())
+		//})
+		//
+		//speer.on("error", console.error)
+		//
+		//speer.on("signal", data => {
+		//	console.log("SIGNAL", JSON.stringify(data))
+		//})
+		//
+		//speer.on("data", data => {
+		//	console.log("data", data)
+		//})
 
 		this.player = this.add.sprite(0, 0, "game.dino1")
 		this.player.scale = 4
@@ -86,7 +97,9 @@ export class Game extends Screen {
 	}
 
 	update(time, delta) {
-		const deltaV = velocity * delta
+		if (time - (this.lastTime || 0) < 33 ) return
+		const deltaV = velocity * (time - (this.lastTime || 0))
+
 		const deltaX = getV(this.keys.left, this.keys.right, deltaV)
 		const deltaY = getV(this.keys.up, this.keys.down, deltaV)
 
@@ -98,6 +111,8 @@ export class Game extends Screen {
 		deltaX > 0 && (this.player.flipX = false)
 
 		dirty && peers.forEach(peer => peer.send({ x: this.player.x, y: this.player.y }))
+
+		this.lastTime = time
 	}
 }
 
