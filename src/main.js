@@ -46,23 +46,7 @@ const screens = {
         routes: {
             debug: "debug",
             //Example of custom routing function
-            next: scene => {
-                scene.navigate("game");
-            },
-        },
-    },
-    "character-select": {
-        scene: Select,
-        routes: {
-            next: "level-select",
-            home: "home",
-        },
-    },
-    "level-select": {
-        scene: Select,
-        routes: {
             next: "game",
-            home: "home",
         },
     },
     game: {

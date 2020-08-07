@@ -1,0 +1,126 @@
+{
+	"game": {
+		"prefix": "game.",
+		"files": [
+			{
+				"type": "spritesheet",
+				"key": "dino1",
+				"url": "game/dinoCharactersVersion1.1/sheets/vita.png",
+				"frameConfig": {
+					"frameWidth": 24,
+					"frameHeight": 24,
+					"margin": 0,
+					"spacing": 0
+				}
+			},
+			{
+				"type": "spritesheet",
+				"key": "dino2",
+				"url": "game/dinoCharactersVersion1.1/sheets/doux.png",
+				"frameConfig": {
+					"frameWidth": 24,
+					"frameHeight": 24,
+					"margin": 0,
+					"spacing": 0
+				}
+			},
+			{
+				"type": "spritesheet",
+				"key": "dino3",
+				"url": "game/dinoCharactersVersion1.1/sheets/mort.png",
+				"frameConfig": {
+					"frameWidth": 24,
+					"frameHeight": 24,
+					"margin": 0,
+					"spacing": 0
+				}
+			},
+			{
+				"type": "spritesheet",
+				"key": "dino4",
+				"url": "game/dinoCharactersVersion1.1/sheets/tard.png",
+				"frameConfig": {
+					"frameWidth": 24,
+					"frameHeight": 24,
+					"margin": 0,
+					"spacing": 0
+				}
+			},
+			{
+				"type": "spritesheet",
+				"key": "egg",
+				"url": "game/dinoCharactersVersion1.1/sheets/egg.png",
+				"frameConfig": {
+					"frameWidth": 16,
+					"frameHeight": 20,
+					"margin": 0,
+					"spacing": 4
+				}
+			},
+			{
+				"type": "spritesheet",
+				"key": "grass",
+				"url": "game/grass.png",
+				"frameConfig": {
+					"frameWidth": 40,
+					"frameHeight": 24,
+					"margin": 0,
+					"spacing": 0
+				}
+			},
+			{
+				"type": "image",
+				"key": "ground",
+				"url": "game/ground.jpg"
+			},
+			{
+				"type": "audio",
+				"key": "eggCrack",
+				"url": "game/audio/egg-crack.wav",
+				"autoDecode": true
+			},
+			{
+				"type": "particles",
+				"key": "eggHatch",
+				"url": "game/particles/egg-hatch.json"
+			},
+
+			{
+				"type": "image",
+				"key": "basicButton",
+				"url": "game/basic-button.png"
+			},
+			{
+				"type": "image",
+				"key": "key",
+				"url": "game/key.png"
+			},
+			{
+				"type": "image",
+				"key": "gem",
+				"url": "game/gem.png"
+			},
+			{
+				"type": "spritesheet",
+				"key": "diamond",
+				"url": "game/diamond.png",
+				"frameConfig": {
+					"frameWidth": 64,
+					"frameHeight": 64,
+					"margin": 2,
+					"spacing": 2
+				}
+			},
+			{
+				"type": "image",
+				"key": "star",
+				"url": "game/star.png"
+			},
+			{
+				"type": "audio",
+				"key": "backgroundMusicTwo",
+				"url": "shared/background-music-2.mp3"
+			}
+		]
+	}
+}

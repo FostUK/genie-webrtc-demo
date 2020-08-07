@@ -14,7 +14,7 @@
   "dependencies": {
     "@geckos.io/client": "^1.6.1",
     "@geckos.io/server": "^1.6.1",
-    "genie": "git+ssh://git@github.com/bbc/genie.git#v3.4.6",
+    "genie": "git+ssh://git@github.com/bbc/genie.git#v3.8.2",
     "peer": "^0.5.2",
     "peerjs": "^1.2.0",
     "simple-peer": "^9.7.2"
