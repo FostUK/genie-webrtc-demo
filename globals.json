@@ -1,7 +1,7 @@
 [
 	{
-		"moduleVar": "peerjs",
-		"npmName": "peerjs",
+		"moduleVar": "Peer",
+		"npmName": ["peerjs", "default"],
 		"url": "/node_modules/peerjs/dist/peerjs.min.js"
 	},
 	{
