@@ -1,16 +1,19 @@
 {
-  "name": "genie-starter-pack",
+  "name": "genie-networking",
   "version": "0.0.1",
   "description": "Children's BBC - Genie Starter Pack",
   "license": "UNLICENSED",
   "private": false,
   "author": "BBC",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/bbc/genie-starter-pack"
   },
   "homepage": "https://github.com/bbc/genie-starter-pack#readme",
   "dependencies": {
+    "@geckos.io/client": "^1.6.1",
+    "@geckos.io/server": "^1.6.1",
     "genie": "git+ssh://git@github.com/bbc/genie.git#v3.4.6",
     "peer": "^0.5.2",
     "peerjs": "^1.2.0",
@@ -31,6 +34,6 @@
     "eslint": "eslint . --ignore-pattern lodash --ignore-path .gitignore",
     "validate": "node node_modules/genie/build-scripts/schemavalidator/validator.js achievement",
     "startPeer": "node handshake-server.js",
-    "startPeerX": "peerjs --port 9000 --key peerjs --path /handshake"
+    "startRelay": "node relay-server.js"
   }
 }
