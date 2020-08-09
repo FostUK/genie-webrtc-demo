@@ -1,6 +1,6 @@
 import { Screen } from "/node_modules/genie/src/core/screen.js"
 import { initWebRTC, peers } from "./webrtc.js"
-import { initGeckos, channel } from "./geckos.js"
+import { initGeckos, channel, playerIndex } from "./geckos.js"
 
 const velocity = 0.2
 
@@ -19,11 +19,11 @@ const update = {
 export class Game extends Screen {
 	create() {
 		this.addBackgroundItems()
-		this.player = this.add.sprite(0, 0, "game.dino1")
-		this.player.scale = 4
 		this.keys = this.input.keyboard.createCursorKeys()
-
 		protocols[protocol](this)
+
+		this.player = this.add.sprite(0, 0, `game.dino${playerIndex+1}`)
+		this.player.scale = 4
 	}
 
 	update(time, delta) {
