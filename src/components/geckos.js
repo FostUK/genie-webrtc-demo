@@ -14,8 +14,8 @@ import { geckos } from "/lib/geckos.io-client.1.6.1.min.js"
 //}
 
 const remote = {
-	url: "http://relay.bigredmonster.com",
-	port: 80,
+	url: "https://relay.bigredmonster.com",
+	port: 443,
 }
 
 export let channel
