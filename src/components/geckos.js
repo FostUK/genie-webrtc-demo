@@ -23,6 +23,7 @@ export let channel
 const players = {} //TODO weakmap?
 
 const drop = id => {
+	if (!players[id]) return    //TODO why does this sometimes come up?
 	console.log("DROPPED", id)
 	players[id].sprite.destroy()
 	delete players[id]
