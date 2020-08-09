@@ -37,10 +37,10 @@ export class Game extends Screen {
 		let down = this.keys.down.isDown
 
 		if (pointer.isDown) {
-			left = pointer.x < 700
-			right = pointer.x >= 700
-			up = pointer.y < 300
-			down = pointer.y >= 300
+			left = pointer.x < 500
+			right = pointer.x > 900
+			up = pointer.y < 150
+			down = pointer.y >= 450
 		}
 
 		const deltaX = getV(left, right, deltaV)

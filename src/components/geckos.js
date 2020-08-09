@@ -39,6 +39,8 @@ const update = data => {
 	player.lastPos.y = data.y
 }
 
+let playerIndex = 0
+
 export const initGeckos = scene => {
 	channel = geckos(remote)
 
@@ -48,7 +50,7 @@ export const initGeckos = scene => {
 
 	channel.on("new", data => {
 		console.log("new")
-		const sprite = scene.add.sprite(0, 0, "game.dino1")
+		const sprite = scene.add.sprite(0, 0, `game.dino${++playerIndex%4}`)
 		sprite.scale = 4
 		sprite.x = data.x
 		sprite.y = data.y
