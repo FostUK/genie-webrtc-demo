@@ -21,13 +21,10 @@ export class Game extends Screen {
 		this.addBackgroundItems()
 		this.keys = this.input.keyboard.createCursorKeys()
 		protocols[protocol](this)
-
-		this.player = this.add.sprite(0, 0, `game.dino${playerIndex+1}`)
-		this.player.scale = 4
 	}
 
 	update(time, delta) {
-		if (time - (this.lastTime || 0) < 33) return
+		if (time - (this.lastTime || 0) < 33 || !this.player) return
 		const deltaV = velocity * (time - (this.lastTime || 0))
 
 		const pointer = this.input.activePointer

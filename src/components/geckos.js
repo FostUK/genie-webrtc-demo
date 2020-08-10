@@ -45,21 +45,29 @@ export const initGeckos = scene => {
 	channel = geckos(remote)
 
 	channel.onConnect(error => {
+
+
+
+		//TODO enable player at this point. Disable connection notification
+		//TODO add connection notification
 		console.log(channel)
 	})
 
 	channel.on("new", data => {
-		playerIndex = ++playerIndex%4
+
+
 		console.log("new")
-		const sprite = scene.add.sprite(0, 0, `game.dino${playerIndex+1}`)
+		const sprite = scene.add.sprite(0, 0, `game.dino${data.index%4 + 1}`)
 		sprite.scale = 4
-		sprite.x = data.x
-		sprite.y = data.y
+		sprite.x = data.lastFrame?.x ?? 0
+		sprite.y = data.lastFrame?.y ?? 0
 
 		players[data.id] = {
 			sprite,
 			lastPos: { x: 0, y: 0 },
 		}
+
+		data.player && (scene.player = sprite)
 	})
 
 	channel.on("drop", drop)
